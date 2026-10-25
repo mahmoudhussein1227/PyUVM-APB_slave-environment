@@ -1,0 +1,371 @@
+<top abs_name="top" size="341" coverage="341" cover_percentage="100.0">
+  <apb_coverage size="341" coverage="341" cover_percentage="100.0" abs_name="top.apb_coverage">
+    <dir size="2" coverage="2" cover_percentage="100.0" abs_name="top.apb_coverage.dir" weight="1" at_least="1">
+      <bin0 bin="APB_READ" hits="12840" abs_name="top.apb_coverage.dir.bin0" />
+      <bin1 bin="APB_WRITE" hits="12685" abs_name="top.apb_coverage.dir.bin1" />
+    </dir>
+    <slverr size="2" coverage="2" cover_percentage="100.0" abs_name="top.apb_coverage.slverr" weight="1" at_least="1">
+      <bin0 bin="APB_OK" hits="6393" abs_name="top.apb_coverage.slverr.bin0" />
+      <bin1 bin="APB_ERR" hits="19132" abs_name="top.apb_coverage.slverr.bin1" />
+    </slverr>
+    <register size="16" coverage="16" cover_percentage="100.0" abs_name="top.apb_coverage.register" weight="1" at_least="1">
+      <bin0 bin="REG_0" hits="595" abs_name="top.apb_coverage.register.bin0" />
+      <bin1 bin="REG_1" hits="394" abs_name="top.apb_coverage.register.bin1" />
+      <bin2 bin="REG_2" hits="346" abs_name="top.apb_coverage.register.bin2" />
+      <bin3 bin="REG_3" hits="429" abs_name="top.apb_coverage.register.bin3" />
+      <bin4 bin="REG_4" hits="369" abs_name="top.apb_coverage.register.bin4" />
+      <bin5 bin="REG_5" hits="404" abs_name="top.apb_coverage.register.bin5" />
+      <bin6 bin="REG_6" hits="410" abs_name="top.apb_coverage.register.bin6" />
+      <bin7 bin="REG_7" hits="427" abs_name="top.apb_coverage.register.bin7" />
+      <bin8 bin="REG_8" hits="420" abs_name="top.apb_coverage.register.bin8" />
+      <bin9 bin="REG_9" hits="413" abs_name="top.apb_coverage.register.bin9" />
+      <bin10 bin="REG_10" hits="348" abs_name="top.apb_coverage.register.bin10" />
+      <bin11 bin="REG_11" hits="410" abs_name="top.apb_coverage.register.bin11" />
+      <bin12 bin="REG_12" hits="421" abs_name="top.apb_coverage.register.bin12" />
+      <bin13 bin="REG_13" hits="414" abs_name="top.apb_coverage.register.bin13" />
+      <bin14 bin="REG_14" hits="392" abs_name="top.apb_coverage.register.bin14" />
+      <bin15 bin="REG_15" hits="411" abs_name="top.apb_coverage.register.bin15" />
+    </register>
+    <reg_right size="3" coverage="3" cover_percentage="100.0" abs_name="top.apb_coverage.reg_right" weight="1" at_least="1">
+      <bin0 bin="RW" hits="6192" abs_name="top.apb_coverage.reg_right.bin0" />
+      <bin1 bin="RO" hits="411" abs_name="top.apb_coverage.reg_right.bin1" />
+      <bin2 bin="UNMAPPED" hits="18922" abs_name="top.apb_coverage.reg_right.bin2" />
+    </reg_right>
+    <pstrb size="15" coverage="15" cover_percentage="100.0" abs_name="top.apb_coverage.pstrb" weight="1" at_least="1">
+      <bin0 bin="0" hits="1586" abs_name="top.apb_coverage.pstrb.bin0" />
+      <bin1 bin="1" hits="1599" abs_name="top.apb_coverage.pstrb.bin1" />
+      <bin2 bin="2" hits="1616" abs_name="top.apb_coverage.pstrb.bin2" />
+      <bin3 bin="3" hits="1582" abs_name="top.apb_coverage.pstrb.bin3" />
+      <bin4 bin="4" hits="1553" abs_name="top.apb_coverage.pstrb.bin4" />
+      <bin5 bin="5" hits="1560" abs_name="top.apb_coverage.pstrb.bin5" />
+      <bin6 bin="6" hits="1506" abs_name="top.apb_coverage.pstrb.bin6" />
+      <bin7 bin="7" hits="1573" abs_name="top.apb_coverage.pstrb.bin7" />
+      <bin8 bin="8" hits="1543" abs_name="top.apb_coverage.pstrb.bin8" />
+      <bin9 bin="9" hits="1583" abs_name="top.apb_coverage.pstrb.bin9" />
+      <bin10 bin="10" hits="1526" abs_name="top.apb_coverage.pstrb.bin10" />
+      <bin11 bin="11" hits="1649" abs_name="top.apb_coverage.pstrb.bin11" />
+      <bin12 bin="12" hits="1564" abs_name="top.apb_coverage.pstrb.bin12" />
+      <bin13 bin="13" hits="1583" abs_name="top.apb_coverage.pstrb.bin13" />
+      <bin14 bin="14" hits="1547" abs_name="top.apb_coverage.pstrb.bin14" />
+    </pstrb>
+    <data_corners size="3" coverage="3" cover_percentage="100.0" abs_name="top.apb_coverage.data_corners" weight="1" at_least="1">
+      <bin0 bin="ALL_ZEROS" hits="9622" abs_name="top.apb_coverage.data_corners.bin0" />
+      <bin1 bin="ALL_ONES" hits="150" abs_name="top.apb_coverage.data_corners.bin1" />
+      <bin2 bin="OTHER" hits="15753" abs_name="top.apb_coverage.data_corners.bin2" />
+    </data_corners>
+    <gap size="2" coverage="2" cover_percentage="100.0" abs_name="top.apb_coverage.gap" weight="1" at_least="1">
+      <bin0 bin="BACK2BACK" hits="679" abs_name="top.apb_coverage.gap.bin0" />
+      <bin1 bin="HAS_GAP" hits="24846" abs_name="top.apb_coverage.gap.bin1" />
+    </gap>
+    <dir_x_reg_right size="6" coverage="6" cover_percentage="100.0" abs_name="top.apb_coverage.dir_x_reg_right" weight="1" at_least="1">
+      <bin0 bin="('APB_READ', 'RW')" hits="3117" abs_name="top.apb_coverage.dir_x_reg_right.bin0" />
+      <bin1 bin="('APB_READ', 'RO')" hits="201" abs_name="top.apb_coverage.dir_x_reg_right.bin1" />
+      <bin2 bin="('APB_READ', 'UNMAPPED')" hits="9522" abs_name="top.apb_coverage.dir_x_reg_right.bin2" />
+      <bin3 bin="('APB_WRITE', 'RW')" hits="3075" abs_name="top.apb_coverage.dir_x_reg_right.bin3" />
+      <bin4 bin="('APB_WRITE', 'RO')" hits="210" abs_name="top.apb_coverage.dir_x_reg_right.bin4" />
+      <bin5 bin="('APB_WRITE', 'UNMAPPED')" hits="9400" abs_name="top.apb_coverage.dir_x_reg_right.bin5" />
+    </dir_x_reg_right>
+    <valid_reg_x_dir size="31" coverage="31" cover_percentage="100.0" abs_name="top.apb_coverage.valid_reg_x_dir" weight="1" at_least="1">
+      <bin0 bin="('REG_0', 'APB_READ')" hits="302" abs_name="top.apb_coverage.valid_reg_x_dir.bin0" />
+      <bin1 bin="('REG_0', 'APB_WRITE')" hits="293" abs_name="top.apb_coverage.valid_reg_x_dir.bin1" />
+      <bin2 bin="('REG_1', 'APB_READ')" hits="211" abs_name="top.apb_coverage.valid_reg_x_dir.bin2" />
+      <bin3 bin="('REG_1', 'APB_WRITE')" hits="183" abs_name="top.apb_coverage.valid_reg_x_dir.bin3" />
+      <bin4 bin="('REG_2', 'APB_READ')" hits="170" abs_name="top.apb_coverage.valid_reg_x_dir.bin4" />
+      <bin5 bin="('REG_2', 'APB_WRITE')" hits="176" abs_name="top.apb_coverage.valid_reg_x_dir.bin5" />
+      <bin6 bin="('REG_3', 'APB_READ')" hits="213" abs_name="top.apb_coverage.valid_reg_x_dir.bin6" />
+      <bin7 bin="('REG_3', 'APB_WRITE')" hits="216" abs_name="top.apb_coverage.valid_reg_x_dir.bin7" />
+      <bin8 bin="('REG_4', 'APB_READ')" hits="189" abs_name="top.apb_coverage.valid_reg_x_dir.bin8" />
+      <bin9 bin="('REG_4', 'APB_WRITE')" hits="180" abs_name="top.apb_coverage.valid_reg_x_dir.bin9" />
+      <bin10 bin="('REG_5', 'APB_READ')" hits="206" abs_name="top.apb_coverage.valid_reg_x_dir.bin10" />
+      <bin11 bin="('REG_5', 'APB_WRITE')" hits="198" abs_name="top.apb_coverage.valid_reg_x_dir.bin11" />
+      <bin12 bin="('REG_6', 'APB_READ')" hits="203" abs_name="top.apb_coverage.valid_reg_x_dir.bin12" />
+      <bin13 bin="('REG_6', 'APB_WRITE')" hits="207" abs_name="top.apb_coverage.valid_reg_x_dir.bin13" />
+      <bin14 bin="('REG_7', 'APB_READ')" hits="209" abs_name="top.apb_coverage.valid_reg_x_dir.bin14" />
+      <bin15 bin="('REG_7', 'APB_WRITE')" hits="218" abs_name="top.apb_coverage.valid_reg_x_dir.bin15" />
+      <bin16 bin="('REG_8', 'APB_READ')" hits="207" abs_name="top.apb_coverage.valid_reg_x_dir.bin16" />
+      <bin17 bin="('REG_8', 'APB_WRITE')" hits="213" abs_name="top.apb_coverage.valid_reg_x_dir.bin17" />
+      <bin18 bin="('REG_9', 'APB_READ')" hits="206" abs_name="top.apb_coverage.valid_reg_x_dir.bin18" />
+      <bin19 bin="('REG_9', 'APB_WRITE')" hits="207" abs_name="top.apb_coverage.valid_reg_x_dir.bin19" />
+      <bin20 bin="('REG_10', 'APB_READ')" hits="176" abs_name="top.apb_coverage.valid_reg_x_dir.bin20" />
+      <bin21 bin="('REG_10', 'APB_WRITE')" hits="172" abs_name="top.apb_coverage.valid_reg_x_dir.bin21" />
+      <bin22 bin="('REG_11', 'APB_READ')" hits="204" abs_name="top.apb_coverage.valid_reg_x_dir.bin22" />
+      <bin23 bin="('REG_11', 'APB_WRITE')" hits="206" abs_name="top.apb_coverage.valid_reg_x_dir.bin23" />
+      <bin24 bin="('REG_12', 'APB_READ')" hits="219" abs_name="top.apb_coverage.valid_reg_x_dir.bin24" />
+      <bin25 bin="('REG_12', 'APB_WRITE')" hits="202" abs_name="top.apb_coverage.valid_reg_x_dir.bin25" />
+      <bin26 bin="('REG_13', 'APB_READ')" hits="215" abs_name="top.apb_coverage.valid_reg_x_dir.bin26" />
+      <bin27 bin="('REG_13', 'APB_WRITE')" hits="199" abs_name="top.apb_coverage.valid_reg_x_dir.bin27" />
+      <bin28 bin="('REG_14', 'APB_READ')" hits="187" abs_name="top.apb_coverage.valid_reg_x_dir.bin28" />
+      <bin29 bin="('REG_14', 'APB_WRITE')" hits="205" abs_name="top.apb_coverage.valid_reg_x_dir.bin29" />
+      <bin30 bin="('REG_15', 'APB_READ')" hits="201" abs_name="top.apb_coverage.valid_reg_x_dir.bin30" />
+    </valid_reg_x_dir>
+    <pstrb_on_write size="240" coverage="240" cover_percentage="100.0" abs_name="top.apb_coverage.pstrb_on_write" weight="1" at_least="1">
+      <bin0 bin="(0, 'APB_WRITE', 'REG_0')" hits="18" abs_name="top.apb_coverage.pstrb_on_write.bin0" />
+      <bin1 bin="(0, 'APB_WRITE', 'REG_1')" hits="12" abs_name="top.apb_coverage.pstrb_on_write.bin1" />
+      <bin2 bin="(0, 'APB_WRITE', 'REG_2')" hits="10" abs_name="top.apb_coverage.pstrb_on_write.bin2" />
+      <bin3 bin="(0, 'APB_WRITE', 'REG_3')" hits="13" abs_name="top.apb_coverage.pstrb_on_write.bin3" />
+      <bin4 bin="(0, 'APB_WRITE', 'REG_4')" hits="10" abs_name="top.apb_coverage.pstrb_on_write.bin4" />
+      <bin5 bin="(0, 'APB_WRITE', 'REG_5')" hits="11" abs_name="top.apb_coverage.pstrb_on_write.bin5" />
+      <bin6 bin="(0, 'APB_WRITE', 'REG_6')" hits="19" abs_name="top.apb_coverage.pstrb_on_write.bin6" />
+      <bin7 bin="(0, 'APB_WRITE', 'REG_7')" hits="9" abs_name="top.apb_coverage.pstrb_on_write.bin7" />
+      <bin8 bin="(0, 'APB_WRITE', 'REG_8')" hits="5" abs_name="top.apb_coverage.pstrb_on_write.bin8" />
+      <bin9 bin="(0, 'APB_WRITE', 'REG_9')" hits="10" abs_name="top.apb_coverage.pstrb_on_write.bin9" />
+      <bin10 bin="(0, 'APB_WRITE', 'REG_10')" hits="8" abs_name="top.apb_coverage.pstrb_on_write.bin10" />
+      <bin11 bin="(0, 'APB_WRITE', 'REG_11')" hits="9" abs_name="top.apb_coverage.pstrb_on_write.bin11" />
+      <bin12 bin="(0, 'APB_WRITE', 'REG_12')" hits="17" abs_name="top.apb_coverage.pstrb_on_write.bin12" />
+      <bin13 bin="(0, 'APB_WRITE', 'REG_13')" hits="13" abs_name="top.apb_coverage.pstrb_on_write.bin13" />
+      <bin14 bin="(0, 'APB_WRITE', 'REG_14')" hits="13" abs_name="top.apb_coverage.pstrb_on_write.bin14" />
+      <bin15 bin="(0, 'APB_WRITE', 'REG_15')" hits="9" abs_name="top.apb_coverage.pstrb_on_write.bin15" />
+      <bin16 bin="(1, 'APB_WRITE', 'REG_0')" hits="23" abs_name="top.apb_coverage.pstrb_on_write.bin16" />
+      <bin17 bin="(1, 'APB_WRITE', 'REG_1')" hits="16" abs_name="top.apb_coverage.pstrb_on_write.bin17" />
+      <bin18 bin="(1, 'APB_WRITE', 'REG_2')" hits="8" abs_name="top.apb_coverage.pstrb_on_write.bin18" />
+      <bin19 bin="(1, 'APB_WRITE', 'REG_3')" hits="13" abs_name="top.apb_coverage.pstrb_on_write.bin19" />
+      <bin20 bin="(1, 'APB_WRITE', 'REG_4')" hits="8" abs_name="top.apb_coverage.pstrb_on_write.bin20" />
+      <bin21 bin="(1, 'APB_WRITE', 'REG_5')" hits="8" abs_name="top.apb_coverage.pstrb_on_write.bin21" />
+      <bin22 bin="(1, 'APB_WRITE', 'REG_6')" hits="16" abs_name="top.apb_coverage.pstrb_on_write.bin22" />
+      <bin23 bin="(1, 'APB_WRITE', 'REG_7')" hits="18" abs_name="top.apb_coverage.pstrb_on_write.bin23" />
+      <bin24 bin="(1, 'APB_WRITE', 'REG_8')" hits="11" abs_name="top.apb_coverage.pstrb_on_write.bin24" />
+      <bin25 bin="(1, 'APB_WRITE', 'REG_9')" hits="17" abs_name="top.apb_coverage.pstrb_on_write.bin25" />
+      <bin26 bin="(1, 'APB_WRITE', 'REG_10')" hits="4" abs_name="top.apb_coverage.pstrb_on_write.bin26" />
+      <bin27 bin="(1, 'APB_WRITE', 'REG_11')" hits="11" abs_name="top.apb_coverage.pstrb_on_write.bin27" />
+      <bin28 bin="(1, 'APB_WRITE', 'REG_12')" hits="14" abs_name="top.apb_coverage.pstrb_on_write.bin28" />
+      <bin29 bin="(1, 'APB_WRITE', 'REG_13')" hits="12" abs_name="top.apb_coverage.pstrb_on_write.bin29" />
+      <bin30 bin="(1, 'APB_WRITE', 'REG_14')" hits="16" abs_name="top.apb_coverage.pstrb_on_write.bin30" />
+      <bin31 bin="(1, 'APB_WRITE', 'REG_15')" hits="10" abs_name="top.apb_coverage.pstrb_on_write.bin31" />
+      <bin32 bin="(2, 'APB_WRITE', 'REG_0')" hits="23" abs_name="top.apb_coverage.pstrb_on_write.bin32" />
+      <bin33 bin="(2, 'APB_WRITE', 'REG_1')" hits="13" abs_name="top.apb_coverage.pstrb_on_write.bin33" />
+      <bin34 bin="(2, 'APB_WRITE', 'REG_2')" hits="8" abs_name="top.apb_coverage.pstrb_on_write.bin34" />
+      <bin35 bin="(2, 'APB_WRITE', 'REG_3')" hits="11" abs_name="top.apb_coverage.pstrb_on_write.bin35" />
+      <bin36 bin="(2, 'APB_WRITE', 'REG_4')" hits="6" abs_name="top.apb_coverage.pstrb_on_write.bin36" />
+      <bin37 bin="(2, 'APB_WRITE', 'REG_5')" hits="20" abs_name="top.apb_coverage.pstrb_on_write.bin37" />
+      <bin38 bin="(2, 'APB_WRITE', 'REG_6')" hits="15" abs_name="top.apb_coverage.pstrb_on_write.bin38" />
+      <bin39 bin="(2, 'APB_WRITE', 'REG_7')" hits="14" abs_name="top.apb_coverage.pstrb_on_write.bin39" />
+      <bin40 bin="(2, 'APB_WRITE', 'REG_8')" hits="12" abs_name="top.apb_coverage.pstrb_on_write.bin40" />
+      <bin41 bin="(2, 'APB_WRITE', 'REG_9')" hits="13" abs_name="top.apb_coverage.pstrb_on_write.bin41" />
+      <bin42 bin="(2, 'APB_WRITE', 'REG_10')" hits="5" abs_name="top.apb_coverage.pstrb_on_write.bin42" />
+      <bin43 bin="(2, 'APB_WRITE', 'REG_11')" hits="16" abs_name="top.apb_coverage.pstrb_on_write.bin43" />
+      <bin44 bin="(2, 'APB_WRITE', 'REG_12')" hits="11" abs_name="top.apb_coverage.pstrb_on_write.bin44" />
+      <bin45 bin="(2, 'APB_WRITE', 'REG_13')" hits="17" abs_name="top.apb_coverage.pstrb_on_write.bin45" />
+      <bin46 bin="(2, 'APB_WRITE', 'REG_14')" hits="10" abs_name="top.apb_coverage.pstrb_on_write.bin46" />
+      <bin47 bin="(2, 'APB_WRITE', 'REG_15')" hits="10" abs_name="top.apb_coverage.pstrb_on_write.bin47" />
+      <bin48 bin="(3, 'APB_WRITE', 'REG_0')" hits="15" abs_name="top.apb_coverage.pstrb_on_write.bin48" />
+      <bin49 bin="(3, 'APB_WRITE', 'REG_1')" hits="7" abs_name="top.apb_coverage.pstrb_on_write.bin49" />
+      <bin50 bin="(3, 'APB_WRITE', 'REG_2')" hits="8" abs_name="top.apb_coverage.pstrb_on_write.bin50" />
+      <bin51 bin="(3, 'APB_WRITE', 'REG_3')" hits="12" abs_name="top.apb_coverage.pstrb_on_write.bin51" />
+      <bin52 bin="(3, 'APB_WRITE', 'REG_4')" hits="14" abs_name="top.apb_coverage.pstrb_on_write.bin52" />
+      <bin53 bin="(3, 'APB_WRITE', 'REG_5')" hits="6" abs_name="top.apb_coverage.pstrb_on_write.bin53" />
+      <bin54 bin="(3, 'APB_WRITE', 'REG_6')" hits="6" abs_name="top.apb_coverage.pstrb_on_write.bin54" />
+      <bin55 bin="(3, 'APB_WRITE', 'REG_7')" hits="18" abs_name="top.apb_coverage.pstrb_on_write.bin55" />
+      <bin56 bin="(3, 'APB_WRITE', 'REG_8')" hits="16" abs_name="top.apb_coverage.pstrb_on_write.bin56" />
+      <bin57 bin="(3, 'APB_WRITE', 'REG_9')" hits="14" abs_name="top.apb_coverage.pstrb_on_write.bin57" />
+      <bin58 bin="(3, 'APB_WRITE', 'REG_10')" hits="10" abs_name="top.apb_coverage.pstrb_on_write.bin58" />
+      <bin59 bin="(3, 'APB_WRITE', 'REG_11')" hits="14" abs_name="top.apb_coverage.pstrb_on_write.bin59" />
+      <bin60 bin="(3, 'APB_WRITE', 'REG_12')" hits="13" abs_name="top.apb_coverage.pstrb_on_write.bin60" />
+      <bin61 bin="(3, 'APB_WRITE', 'REG_13')" hits="7" abs_name="top.apb_coverage.pstrb_on_write.bin61" />
+      <bin62 bin="(3, 'APB_WRITE', 'REG_14')" hits="11" abs_name="top.apb_coverage.pstrb_on_write.bin62" />
+      <bin63 bin="(3, 'APB_WRITE', 'REG_15')" hits="14" abs_name="top.apb_coverage.pstrb_on_write.bin63" />
+      <bin64 bin="(4, 'APB_WRITE', 'REG_0')" hits="19" abs_name="top.apb_coverage.pstrb_on_write.bin64" />
+      <bin65 bin="(4, 'APB_WRITE', 'REG_1')" hits="10" abs_name="top.apb_coverage.pstrb_on_write.bin65" />
+      <bin66 bin="(4, 'APB_WRITE', 'REG_2')" hits="14" abs_name="top.apb_coverage.pstrb_on_write.bin66" />
+      <bin67 bin="(4, 'APB_WRITE', 'REG_3')" hits="16" abs_name="top.apb_coverage.pstrb_on_write.bin67" />
+      <bin68 bin="(4, 'APB_WRITE', 'REG_4')" hits="7" abs_name="top.apb_coverage.pstrb_on_write.bin68" />
+      <bin69 bin="(4, 'APB_WRITE', 'REG_5')" hits="13" abs_name="top.apb_coverage.pstrb_on_write.bin69" />
+      <bin70 bin="(4, 'APB_WRITE', 'REG_6')" hits="12" abs_name="top.apb_coverage.pstrb_on_write.bin70" />
+      <bin71 bin="(4, 'APB_WRITE', 'REG_7')" hits="9" abs_name="top.apb_coverage.pstrb_on_write.bin71" />
+      <bin72 bin="(4, 'APB_WRITE', 'REG_8')" hits="11" abs_name="top.apb_coverage.pstrb_on_write.bin72" />
+      <bin73 bin="(4, 'APB_WRITE', 'REG_9')" hits="16" abs_name="top.apb_coverage.pstrb_on_write.bin73" />
+      <bin74 bin="(4, 'APB_WRITE', 'REG_10')" hits="3" abs_name="top.apb_coverage.pstrb_on_write.bin74" />
+      <bin75 bin="(4, 'APB_WRITE', 'REG_11')" hits="12" abs_name="top.apb_coverage.pstrb_on_write.bin75" />
+      <bin76 bin="(4, 'APB_WRITE', 'REG_12')" hits="11" abs_name="top.apb_coverage.pstrb_on_write.bin76" />
+      <bin77 bin="(4, 'APB_WRITE', 'REG_13')" hits="8" abs_name="top.apb_coverage.pstrb_on_write.bin77" />
+      <bin78 bin="(4, 'APB_WRITE', 'REG_14')" hits="17" abs_name="top.apb_coverage.pstrb_on_write.bin78" />
+      <bin79 bin="(4, 'APB_WRITE', 'REG_15')" hits="10" abs_name="top.apb_coverage.pstrb_on_write.bin79" />
+      <bin80 bin="(5, 'APB_WRITE', 'REG_0')" hits="17" abs_name="top.apb_coverage.pstrb_on_write.bin80" />
+      <bin81 bin="(5, 'APB_WRITE', 'REG_1')" hits="10" abs_name="top.apb_coverage.pstrb_on_write.bin81" />
+      <bin82 bin="(5, 'APB_WRITE', 'REG_2')" hits="15" abs_name="top.apb_coverage.pstrb_on_write.bin82" />
+      <bin83 bin="(5, 'APB_WRITE', 'REG_3')" hits="19" abs_name="top.apb_coverage.pstrb_on_write.bin83" />
+      <bin84 bin="(5, 'APB_WRITE', 'REG_4')" hits="19" abs_name="top.apb_coverage.pstrb_on_write.bin84" />
+      <bin85 bin="(5, 'APB_WRITE', 'REG_5')" hits="12" abs_name="top.apb_coverage.pstrb_on_write.bin85" />
+      <bin86 bin="(5, 'APB_WRITE', 'REG_6')" hits="13" abs_name="top.apb_coverage.pstrb_on_write.bin86" />
+      <bin87 bin="(5, 'APB_WRITE', 'REG_7')" hits="13" abs_name="top.apb_coverage.pstrb_on_write.bin87" />
+      <bin88 bin="(5, 'APB_WRITE', 'REG_8')" hits="15" abs_name="top.apb_coverage.pstrb_on_write.bin88" />
+      <bin89 bin="(5, 'APB_WRITE', 'REG_9')" hits="13" abs_name="top.apb_coverage.pstrb_on_write.bin89" />
+      <bin90 bin="(5, 'APB_WRITE', 'REG_10')" hits="8" abs_name="top.apb_coverage.pstrb_on_write.bin90" />
+      <bin91 bin="(5, 'APB_WRITE', 'REG_11')" hits="8" abs_name="top.apb_coverage.pstrb_on_write.bin91" />
+      <bin92 bin="(5, 'APB_WRITE', 'REG_12')" hits="13" abs_name="top.apb_coverage.pstrb_on_write.bin92" />
+      <bin93 bin="(5, 'APB_WRITE', 'REG_13')" hits="10" abs_name="top.apb_coverage.pstrb_on_write.bin93" />
+      <bin94 bin="(5, 'APB_WRITE', 'REG_14')" hits="11" abs_name="top.apb_coverage.pstrb_on_write.bin94" />
+      <bin95 bin="(5, 'APB_WRITE', 'REG_15')" hits="18" abs_name="top.apb_coverage.pstrb_on_write.bin95" />
+      <bin96 bin="(6, 'APB_WRITE', 'REG_0')" hits="12" abs_name="top.apb_coverage.pstrb_on_write.bin96" />
+      <bin97 bin="(6, 'APB_WRITE', 'REG_1')" hits="13" abs_name="top.apb_coverage.pstrb_on_write.bin97" />
+      <bin98 bin="(6, 'APB_WRITE', 'REG_2')" hits="13" abs_name="top.apb_coverage.pstrb_on_write.bin98" />
+      <bin99 bin="(6, 'APB_WRITE', 'REG_3')" hits="20" abs_name="top.apb_coverage.pstrb_on_write.bin99" />
+      <bin100 bin="(6, 'APB_WRITE', 'REG_4')" hits="15" abs_name="top.apb_coverage.pstrb_on_write.bin100" />
+      <bin101 bin="(6, 'APB_WRITE', 'REG_5')" hits="9" abs_name="top.apb_coverage.pstrb_on_write.bin101" />
+      <bin102 bin="(6, 'APB_WRITE', 'REG_6')" hits="8" abs_name="top.apb_coverage.pstrb_on_write.bin102" />
+      <bin103 bin="(6, 'APB_WRITE', 'REG_7')" hits="10" abs_name="top.apb_coverage.pstrb_on_write.bin103" />
+      <bin104 bin="(6, 'APB_WRITE', 'REG_8')" hits="13" abs_name="top.apb_coverage.pstrb_on_write.bin104" />
+      <bin105 bin="(6, 'APB_WRITE', 'REG_9')" hits="15" abs_name="top.apb_coverage.pstrb_on_write.bin105" />
+      <bin106 bin="(6, 'APB_WRITE', 'REG_10')" hits="12" abs_name="top.apb_coverage.pstrb_on_write.bin106" />
+      <bin107 bin="(6, 'APB_WRITE', 'REG_11')" hits="13" abs_name="top.apb_coverage.pstrb_on_write.bin107" />
+      <bin108 bin="(6, 'APB_WRITE', 'REG_12')" hits="8" abs_name="top.apb_coverage.pstrb_on_write.bin108" />
+      <bin109 bin="(6, 'APB_WRITE', 'REG_13')" hits="10" abs_name="top.apb_coverage.pstrb_on_write.bin109" />
+      <bin110 bin="(6, 'APB_WRITE', 'REG_14')" hits="14" abs_name="top.apb_coverage.pstrb_on_write.bin110" />
+      <bin111 bin="(6, 'APB_WRITE', 'REG_15')" hits="16" abs_name="top.apb_coverage.pstrb_on_write.bin111" />
+      <bin112 bin="(7, 'APB_WRITE', 'REG_0')" hits="18" abs_name="top.apb_coverage.pstrb_on_write.bin112" />
+      <bin113 bin="(7, 'APB_WRITE', 'REG_1')" hits="17" abs_name="top.apb_coverage.pstrb_on_write.bin113" />
+      <bin114 bin="(7, 'APB_WRITE', 'REG_2')" hits="4" abs_name="top.apb_coverage.pstrb_on_write.bin114" />
+      <bin115 bin="(7, 'APB_WRITE', 'REG_3')" hits="10" abs_name="top.apb_coverage.pstrb_on_write.bin115" />
+      <bin116 bin="(7, 'APB_WRITE', 'REG_4')" hits="12" abs_name="top.apb_coverage.pstrb_on_write.bin116" />
+      <bin117 bin="(7, 'APB_WRITE', 'REG_5')" hits="12" abs_name="top.apb_coverage.pstrb_on_write.bin117" />
+      <bin118 bin="(7, 'APB_WRITE', 'REG_6')" hits="5" abs_name="top.apb_coverage.pstrb_on_write.bin118" />
+      <bin119 bin="(7, 'APB_WRITE', 'REG_7')" hits="11" abs_name="top.apb_coverage.pstrb_on_write.bin119" />
+      <bin120 bin="(7, 'APB_WRITE', 'REG_8')" hits="16" abs_name="top.apb_coverage.pstrb_on_write.bin120" />
+      <bin121 bin="(7, 'APB_WRITE', 'REG_9')" hits="6" abs_name="top.apb_coverage.pstrb_on_write.bin121" />
+      <bin122 bin="(7, 'APB_WRITE', 'REG_10')" hits="13" abs_name="top.apb_coverage.pstrb_on_write.bin122" />
+      <bin123 bin="(7, 'APB_WRITE', 'REG_11')" hits="16" abs_name="top.apb_coverage.pstrb_on_write.bin123" />
+      <bin124 bin="(7, 'APB_WRITE', 'REG_12')" hits="10" abs_name="top.apb_coverage.pstrb_on_write.bin124" />
+      <bin125 bin="(7, 'APB_WRITE', 'REG_13')" hits="17" abs_name="top.apb_coverage.pstrb_on_write.bin125" />
+      <bin126 bin="(7, 'APB_WRITE', 'REG_14')" hits="15" abs_name="top.apb_coverage.pstrb_on_write.bin126" />
+      <bin127 bin="(7, 'APB_WRITE', 'REG_15')" hits="13" abs_name="top.apb_coverage.pstrb_on_write.bin127" />
+      <bin128 bin="(8, 'APB_WRITE', 'REG_0')" hits="19" abs_name="top.apb_coverage.pstrb_on_write.bin128" />
+      <bin129 bin="(8, 'APB_WRITE', 'REG_1')" hits="15" abs_name="top.apb_coverage.pstrb_on_write.bin129" />
+      <bin130 bin="(8, 'APB_WRITE', 'REG_2')" hits="15" abs_name="top.apb_coverage.pstrb_on_write.bin130" />
+      <bin131 bin="(8, 'APB_WRITE', 'REG_3')" hits="12" abs_name="top.apb_coverage.pstrb_on_write.bin131" />
+      <bin132 bin="(8, 'APB_WRITE', 'REG_4')" hits="11" abs_name="top.apb_coverage.pstrb_on_write.bin132" />
+      <bin133 bin="(8, 'APB_WRITE', 'REG_5')" hits="14" abs_name="top.apb_coverage.pstrb_on_write.bin133" />
+      <bin134 bin="(8, 'APB_WRITE', 'REG_6')" hits="11" abs_name="top.apb_coverage.pstrb_on_write.bin134" />
+      <bin135 bin="(8, 'APB_WRITE', 'REG_7')" hits="14" abs_name="top.apb_coverage.pstrb_on_write.bin135" />
+      <bin136 bin="(8, 'APB_WRITE', 'REG_8')" hits="10" abs_name="top.apb_coverage.pstrb_on_write.bin136" />
+      <bin137 bin="(8, 'APB_WRITE', 'REG_9')" hits="11" abs_name="top.apb_coverage.pstrb_on_write.bin137" />
+      <bin138 bin="(8, 'APB_WRITE', 'REG_10')" hits="20" abs_name="top.apb_coverage.pstrb_on_write.bin138" />
+      <bin139 bin="(8, 'APB_WRITE', 'REG_11')" hits="13" abs_name="top.apb_coverage.pstrb_on_write.bin139" />
+      <bin140 bin="(8, 'APB_WRITE', 'REG_12')" hits="12" abs_name="top.apb_coverage.pstrb_on_write.bin140" />
+      <bin141 bin="(8, 'APB_WRITE', 'REG_13')" hits="13" abs_name="top.apb_coverage.pstrb_on_write.bin141" />
+      <bin142 bin="(8, 'APB_WRITE', 'REG_14')" hits="12" abs_name="top.apb_coverage.pstrb_on_write.bin142" />
+      <bin143 bin="(8, 'APB_WRITE', 'REG_15')" hits="12" abs_name="top.apb_coverage.pstrb_on_write.bin143" />
+      <bin144 bin="(9, 'APB_WRITE', 'REG_0')" hits="19" abs_name="top.apb_coverage.pstrb_on_write.bin144" />
+      <bin145 bin="(9, 'APB_WRITE', 'REG_1')" hits="13" abs_name="top.apb_coverage.pstrb_on_write.bin145" />
+      <bin146 bin="(9, 'APB_WRITE', 'REG_2')" hits="10" abs_name="top.apb_coverage.pstrb_on_write.bin146" />
+      <bin147 bin="(9, 'APB_WRITE', 'REG_3')" hits="17" abs_name="top.apb_coverage.pstrb_on_write.bin147" />
+      <bin148 bin="(9, 'APB_WRITE', 'REG_4')" hits="12" abs_name="top.apb_coverage.pstrb_on_write.bin148" />
+      <bin149 bin="(9, 'APB_WRITE', 'REG_5')" hits="18" abs_name="top.apb_coverage.pstrb_on_write.bin149" />
+      <bin150 bin="(9, 'APB_WRITE', 'REG_6')" hits="24" abs_name="top.apb_coverage.pstrb_on_write.bin150" />
+      <bin151 bin="(9, 'APB_WRITE', 'REG_7')" hits="10" abs_name="top.apb_coverage.pstrb_on_write.bin151" />
+      <bin152 bin="(9, 'APB_WRITE', 'REG_8')" hits="11" abs_name="top.apb_coverage.pstrb_on_write.bin152" />
+      <bin153 bin="(9, 'APB_WRITE', 'REG_9')" hits="8" abs_name="top.apb_coverage.pstrb_on_write.bin153" />
+      <bin154 bin="(9, 'APB_WRITE', 'REG_10')" hits="17" abs_name="top.apb_coverage.pstrb_on_write.bin154" />
+      <bin155 bin="(9, 'APB_WRITE', 'REG_11')" hits="16" abs_name="top.apb_coverage.pstrb_on_write.bin155" />
+      <bin156 bin="(9, 'APB_WRITE', 'REG_12')" hits="11" abs_name="top.apb_coverage.pstrb_on_write.bin156" />
+      <bin157 bin="(9, 'APB_WRITE', 'REG_13')" hits="12" abs_name="top.apb_coverage.pstrb_on_write.bin157" />
+      <bin158 bin="(9, 'APB_WRITE', 'REG_14')" hits="13" abs_name="top.apb_coverage.pstrb_on_write.bin158" />
+      <bin159 bin="(9, 'APB_WRITE', 'REG_15')" hits="17" abs_name="top.apb_coverage.pstrb_on_write.bin159" />
+      <bin160 bin="(10, 'APB_WRITE', 'REG_0')" hits="17" abs_name="top.apb_coverage.pstrb_on_write.bin160" />
+      <bin161 bin="(10, 'APB_WRITE', 'REG_1')" hits="9" abs_name="top.apb_coverage.pstrb_on_write.bin161" />
+      <bin162 bin="(10, 'APB_WRITE', 'REG_2')" hits="12" abs_name="top.apb_coverage.pstrb_on_write.bin162" />
+      <bin163 bin="(10, 'APB_WRITE', 'REG_3')" hits="9" abs_name="top.apb_coverage.pstrb_on_write.bin163" />
+      <bin164 bin="(10, 'APB_WRITE', 'REG_4')" hits="13" abs_name="top.apb_coverage.pstrb_on_write.bin164" />
+      <bin165 bin="(10, 'APB_WRITE', 'REG_5')" hits="11" abs_name="top.apb_coverage.pstrb_on_write.bin165" />
+      <bin166 bin="(10, 'APB_WRITE', 'REG_6')" hits="5" abs_name="top.apb_coverage.pstrb_on_write.bin166" />
+      <bin167 bin="(10, 'APB_WRITE', 'REG_7')" hits="10" abs_name="top.apb_coverage.pstrb_on_write.bin167" />
+      <bin168 bin="(10, 'APB_WRITE', 'REG_8')" hits="21" abs_name="top.apb_coverage.pstrb_on_write.bin168" />
+      <bin169 bin="(10, 'APB_WRITE', 'REG_9')" hits="10" abs_name="top.apb_coverage.pstrb_on_write.bin169" />
+      <bin170 bin="(10, 'APB_WRITE', 'REG_10')" hits="13" abs_name="top.apb_coverage.pstrb_on_write.bin170" />
+      <bin171 bin="(10, 'APB_WRITE', 'REG_11')" hits="8" abs_name="top.apb_coverage.pstrb_on_write.bin171" />
+      <bin172 bin="(10, 'APB_WRITE', 'REG_12')" hits="8" abs_name="top.apb_coverage.pstrb_on_write.bin172" />
+      <bin173 bin="(10, 'APB_WRITE', 'REG_13')" hits="16" abs_name="top.apb_coverage.pstrb_on_write.bin173" />
+      <bin174 bin="(10, 'APB_WRITE', 'REG_14')" hits="6" abs_name="top.apb_coverage.pstrb_on_write.bin174" />
+      <bin175 bin="(10, 'APB_WRITE', 'REG_15')" hits="10" abs_name="top.apb_coverage.pstrb_on_write.bin175" />
+      <bin176 bin="(11, 'APB_WRITE', 'REG_0')" hits="20" abs_name="top.apb_coverage.pstrb_on_write.bin176" />
+      <bin177 bin="(11, 'APB_WRITE', 'REG_1')" hits="8" abs_name="top.apb_coverage.pstrb_on_write.bin177" />
+      <bin178 bin="(11, 'APB_WRITE', 'REG_2')" hits="15" abs_name="top.apb_coverage.pstrb_on_write.bin178" />
+      <bin179 bin="(11, 'APB_WRITE', 'REG_3')" hits="13" abs_name="top.apb_coverage.pstrb_on_write.bin179" />
+      <bin180 bin="(11, 'APB_WRITE', 'REG_4')" hits="10" abs_name="top.apb_coverage.pstrb_on_write.bin180" />
+      <bin181 bin="(11, 'APB_WRITE', 'REG_5')" hits="14" abs_name="top.apb_coverage.pstrb_on_write.bin181" />
+      <bin182 bin="(11, 'APB_WRITE', 'REG_6')" hits="14" abs_name="top.apb_coverage.pstrb_on_write.bin182" />
+      <bin183 bin="(11, 'APB_WRITE', 'REG_7')" hits="12" abs_name="top.apb_coverage.pstrb_on_write.bin183" />
+      <bin184 bin="(11, 'APB_WRITE', 'REG_8')" hits="17" abs_name="top.apb_coverage.pstrb_on_write.bin184" />
+      <bin185 bin="(11, 'APB_WRITE', 'REG_9')" hits="11" abs_name="top.apb_coverage.pstrb_on_write.bin185" />
+      <bin186 bin="(11, 'APB_WRITE', 'REG_10')" hits="9" abs_name="top.apb_coverage.pstrb_on_write.bin186" />
+      <bin187 bin="(11, 'APB_WRITE', 'REG_11')" hits="15" abs_name="top.apb_coverage.pstrb_on_write.bin187" />
+      <bin188 bin="(11, 'APB_WRITE', 'REG_12')" hits="14" abs_name="top.apb_coverage.pstrb_on_write.bin188" />
+      <bin189 bin="(11, 'APB_WRITE', 'REG_13')" hits="9" abs_name="top.apb_coverage.pstrb_on_write.bin189" />
+      <bin190 bin="(11, 'APB_WRITE', 'REG_14')" hits="15" abs_name="top.apb_coverage.pstrb_on_write.bin190" />
+      <bin191 bin="(11, 'APB_WRITE', 'REG_15')" hits="12" abs_name="top.apb_coverage.pstrb_on_write.bin191" />
+      <bin192 bin="(12, 'APB_WRITE', 'REG_0')" hits="16" abs_name="top.apb_coverage.pstrb_on_write.bin192" />
+      <bin193 bin="(12, 'APB_WRITE', 'REG_1')" hits="5" abs_name="top.apb_coverage.pstrb_on_write.bin193" />
+      <bin194 bin="(12, 'APB_WRITE', 'REG_2')" hits="9" abs_name="top.apb_coverage.pstrb_on_write.bin194" />
+      <bin195 bin="(12, 'APB_WRITE', 'REG_3')" hits="9" abs_name="top.apb_coverage.pstrb_on_write.bin195" />
+      <bin196 bin="(12, 'APB_WRITE', 'REG_4')" hits="8" abs_name="top.apb_coverage.pstrb_on_write.bin196" />
+      <bin197 bin="(12, 'APB_WRITE', 'REG_5')" hits="10" abs_name="top.apb_coverage.pstrb_on_write.bin197" />
+      <bin198 bin="(12, 'APB_WRITE', 'REG_6')" hits="14" abs_name="top.apb_coverage.pstrb_on_write.bin198" />
+      <bin199 bin="(12, 'APB_WRITE', 'REG_7')" hits="15" abs_name="top.apb_coverage.pstrb_on_write.bin199" />
+      <bin200 bin="(12, 'APB_WRITE', 'REG_8')" hits="12" abs_name="top.apb_coverage.pstrb_on_write.bin200" />
+      <bin201 bin="(12, 'APB_WRITE', 'REG_9')" hits="21" abs_name="top.apb_coverage.pstrb_on_write.bin201" />
+      <bin202 bin="(12, 'APB_WRITE', 'REG_10')" hits="11" abs_name="top.apb_coverage.pstrb_on_write.bin202" />
+      <bin203 bin="(12, 'APB_WRITE', 'REG_11')" hits="13" abs_name="top.apb_coverage.pstrb_on_write.bin203" />
+      <bin204 bin="(12, 'APB_WRITE', 'REG_12')" hits="15" abs_name="top.apb_coverage.pstrb_on_write.bin204" />
+      <bin205 bin="(12, 'APB_WRITE', 'REG_13')" hits="12" abs_name="top.apb_coverage.pstrb_on_write.bin205" />
+      <bin206 bin="(12, 'APB_WRITE', 'REG_14')" hits="15" abs_name="top.apb_coverage.pstrb_on_write.bin206" />
+      <bin207 bin="(12, 'APB_WRITE', 'REG_15')" hits="16" abs_name="top.apb_coverage.pstrb_on_write.bin207" />
+      <bin208 bin="(13, 'APB_WRITE', 'REG_0')" hits="16" abs_name="top.apb_coverage.pstrb_on_write.bin208" />
+      <bin209 bin="(13, 'APB_WRITE', 'REG_1')" hits="9" abs_name="top.apb_coverage.pstrb_on_write.bin209" />
+      <bin210 bin="(13, 'APB_WRITE', 'REG_2')" hits="10" abs_name="top.apb_coverage.pstrb_on_write.bin210" />
+      <bin211 bin="(13, 'APB_WRITE', 'REG_3')" hits="9" abs_name="top.apb_coverage.pstrb_on_write.bin211" />
+      <bin212 bin="(13, 'APB_WRITE', 'REG_4')" hits="10" abs_name="top.apb_coverage.pstrb_on_write.bin212" />
+      <bin213 bin="(13, 'APB_WRITE', 'REG_5')" hits="11" abs_name="top.apb_coverage.pstrb_on_write.bin213" />
+      <bin214 bin="(13, 'APB_WRITE', 'REG_6')" hits="11" abs_name="top.apb_coverage.pstrb_on_write.bin214" />
+      <bin215 bin="(13, 'APB_WRITE', 'REG_7')" hits="14" abs_name="top.apb_coverage.pstrb_on_write.bin215" />
+      <bin216 bin="(13, 'APB_WRITE', 'REG_8')" hits="17" abs_name="top.apb_coverage.pstrb_on_write.bin216" />
+      <bin217 bin="(13, 'APB_WRITE', 'REG_9')" hits="8" abs_name="top.apb_coverage.pstrb_on_write.bin217" />
+      <bin218 bin="(13, 'APB_WRITE', 'REG_10')" hits="10" abs_name="top.apb_coverage.pstrb_on_write.bin218" />
+      <bin219 bin="(13, 'APB_WRITE', 'REG_11')" hits="15" abs_name="top.apb_coverage.pstrb_on_write.bin219" />
+      <bin220 bin="(13, 'APB_WRITE', 'REG_12')" hits="16" abs_name="top.apb_coverage.pstrb_on_write.bin220" />
+      <bin221 bin="(13, 'APB_WRITE', 'REG_13')" hits="12" abs_name="top.apb_coverage.pstrb_on_write.bin221" />
+      <bin222 bin="(13, 'APB_WRITE', 'REG_14')" hits="12" abs_name="top.apb_coverage.pstrb_on_write.bin222" />
+      <bin223 bin="(13, 'APB_WRITE', 'REG_15')" hits="13" abs_name="top.apb_coverage.pstrb_on_write.bin223" />
+      <bin224 bin="(14, 'APB_WRITE', 'REG_0')" hits="12" abs_name="top.apb_coverage.pstrb_on_write.bin224" />
+      <bin225 bin="(14, 'APB_WRITE', 'REG_1')" hits="11" abs_name="top.apb_coverage.pstrb_on_write.bin225" />
+      <bin226 bin="(14, 'APB_WRITE', 'REG_2')" hits="11" abs_name="top.apb_coverage.pstrb_on_write.bin226" />
+      <bin227 bin="(14, 'APB_WRITE', 'REG_3')" hits="13" abs_name="top.apb_coverage.pstrb_on_write.bin227" />
+      <bin228 bin="(14, 'APB_WRITE', 'REG_4')" hits="14" abs_name="top.apb_coverage.pstrb_on_write.bin228" />
+      <bin229 bin="(14, 'APB_WRITE', 'REG_5')" hits="11" abs_name="top.apb_coverage.pstrb_on_write.bin229" />
+      <bin230 bin="(14, 'APB_WRITE', 'REG_6')" hits="18" abs_name="top.apb_coverage.pstrb_on_write.bin230" />
+      <bin231 bin="(14, 'APB_WRITE', 'REG_7')" hits="20" abs_name="top.apb_coverage.pstrb_on_write.bin231" />
+      <bin232 bin="(14, 'APB_WRITE', 'REG_8')" hits="12" abs_name="top.apb_coverage.pstrb_on_write.bin232" />
+      <bin233 bin="(14, 'APB_WRITE', 'REG_9')" hits="16" abs_name="top.apb_coverage.pstrb_on_write.bin233" />
+      <bin234 bin="(14, 'APB_WRITE', 'REG_10')" hits="13" abs_name="top.apb_coverage.pstrb_on_write.bin234" />
+      <bin235 bin="(14, 'APB_WRITE', 'REG_11')" hits="13" abs_name="top.apb_coverage.pstrb_on_write.bin235" />
+      <bin236 bin="(14, 'APB_WRITE', 'REG_12')" hits="13" abs_name="top.apb_coverage.pstrb_on_write.bin236" />
+      <bin237 bin="(14, 'APB_WRITE', 'REG_13')" hits="16" abs_name="top.apb_coverage.pstrb_on_write.bin237" />
+      <bin238 bin="(14, 'APB_WRITE', 'REG_14')" hits="11" abs_name="top.apb_coverage.pstrb_on_write.bin238" />
+      <bin239 bin="(14, 'APB_WRITE', 'REG_15')" hits="15" abs_name="top.apb_coverage.pstrb_on_write.bin239" />
+    </pstrb_on_write>
+    <pstrb_on_read size="15" coverage="15" cover_percentage="100.0" abs_name="top.apb_coverage.pstrb_on_read" weight="1" at_least="1">
+      <bin0 bin="(0, 'APB_READ')" hits="818" abs_name="top.apb_coverage.pstrb_on_read.bin0" />
+      <bin1 bin="(1, 'APB_READ')" hits="802" abs_name="top.apb_coverage.pstrb_on_read.bin1" />
+      <bin2 bin="(2, 'APB_READ')" hits="806" abs_name="top.apb_coverage.pstrb_on_read.bin2" />
+      <bin3 bin="(3, 'APB_READ')" hits="814" abs_name="top.apb_coverage.pstrb_on_read.bin3" />
+      <bin4 bin="(4, 'APB_READ')" hits="757" abs_name="top.apb_coverage.pstrb_on_read.bin4" />
+      <bin5 bin="(5, 'APB_READ')" hits="792" abs_name="top.apb_coverage.pstrb_on_read.bin5" />
+      <bin6 bin="(6, 'APB_READ')" hits="743" abs_name="top.apb_coverage.pstrb_on_read.bin6" />
+      <bin7 bin="(7, 'APB_READ')" hits="773" abs_name="top.apb_coverage.pstrb_on_read.bin7" />
+      <bin8 bin="(8, 'APB_READ')" hits="763" abs_name="top.apb_coverage.pstrb_on_read.bin8" />
+      <bin9 bin="(9, 'APB_READ')" hits="766" abs_name="top.apb_coverage.pstrb_on_read.bin9" />
+      <bin10 bin="(10, 'APB_READ')" hits="781" abs_name="top.apb_coverage.pstrb_on_read.bin10" />
+      <bin11 bin="(11, 'APB_READ')" hits="791" abs_name="top.apb_coverage.pstrb_on_read.bin11" />
+      <bin12 bin="(12, 'APB_READ')" hits="792" abs_name="top.apb_coverage.pstrb_on_read.bin12" />
+      <bin13 bin="(13, 'APB_READ')" hits="822" abs_name="top.apb_coverage.pstrb_on_read.bin13" />
+      <bin14 bin="(14, 'APB_READ')" hits="780" abs_name="top.apb_coverage.pstrb_on_read.bin14" />
+    </pstrb_on_read>
+    <dir_x_slverr size="4" coverage="4" cover_percentage="100.0" abs_name="top.apb_coverage.dir_x_slverr" weight="1" at_least="1">
+      <bin0 bin="('APB_READ', 'APB_OK')" hits="3318" abs_name="top.apb_coverage.dir_x_slverr.bin0" />
+      <bin1 bin="('APB_READ', 'APB_ERR')" hits="9522" abs_name="top.apb_coverage.dir_x_slverr.bin1" />
+      <bin2 bin="('APB_WRITE', 'APB_OK')" hits="3075" abs_name="top.apb_coverage.dir_x_slverr.bin2" />
+      <bin3 bin="('APB_WRITE', 'APB_ERR')" hits="9610" abs_name="top.apb_coverage.dir_x_slverr.bin3" />
+    </dir_x_slverr>
+    <reset_coverage size="2" coverage="2" cover_percentage="100.0" abs_name="top.apb_coverage.reset_coverage" weight="1" at_least="1">
+      <bin0 bin="RESET_ON_ACTIVE_TR" hits="5" abs_name="top.apb_coverage.reset_coverage.bin0" />
+      <bin1 bin="RESET_ON_IDLE_BUS" hits="30" abs_name="top.apb_coverage.reset_coverage.bin1" />
+    </reset_coverage>
+  </apb_coverage>
+</top>

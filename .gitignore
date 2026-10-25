@@ -1,0 +1,19 @@
+# Questa and other simulator output
+transcript
+vsim.wlf
+*.wlf
+*.log
+modelsim.ini
+
+# Python-generated files
+__pycache__/
+*.py[cod]
+
+# Local editor configuration
+.vscode/
+
+# Keep only the merged coverage report; ignore simulation databases and runs.
+/build/*
+!/build/coverage/
+/build/coverage/*
+!/build/coverage/merged.xml
