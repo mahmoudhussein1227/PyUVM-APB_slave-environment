@@ -1,4 +1,4 @@
-# APB Slave Register Block
+# PyUVM-APB_slave-environment
 
 A 16 x 32-bit APB register block implemented in Verilog and verified with a
 pyuvm/Cocotb testbench.
