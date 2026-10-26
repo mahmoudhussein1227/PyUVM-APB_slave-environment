@@ -83,6 +83,40 @@ the coverage target.
 The directed tests replace the base test's random sequence through the pyuvm
 factory. The reset test uses its own run phase to interrupt a transfer.
 
+### Reset handling
+
+Reset is active low (`presetn`). The testbench coordinates reset handling
+through the `reset_handler` mixin, which gives each participating component a
+`handle_reset()` callback. The agent watches for the falling edge of
+`presetn`; when reset asserts, it calls the callback on each child that
+implements the mixin, then waits for reset to be released before continuing.
+The driver and monitor also wait for reset release before starting their
+background transaction loops.
+
+On reset assertion, the components perform the following actions:
+
+- **Driver:** cancels the active transaction-driving task if one is running,
+  marks the interrupted sequencer item done, and drives `psel`, `penable`,
+  `paddr`, `pwrite`, `pwdata`, and `pstrb` to idle values. This prevents a
+  partially driven APB transfer from continuing after reset.
+- **Monitor:** cancels its active collection task so that a transfer
+  interrupted before `PREADY` is not published as a completed transaction.
+  Collection restarts after reset is released.
+- **Reference model:** performs a hard reset of the UVM register model, which
+  restores the mirrored register state to its reset values.
+- **Scoreboard:** flushes the expected-response and expected-read-data FIFOs
+  so predictions queued for an interrupted transfer cannot be compared with
+  later traffic.
+- **Coverage collector:** samples the value of `psel` when reset handling
+  occurs, distinguishing reset with an active bus select from reset while
+  idle.
+
+The `test_reset_on_going` test starts a random sequence, waits for `psel` to
+assert, then asserts `presetn` during the transfer. After a clock edge it
+releases reset and submits ten more random sequence items. This exercises
+interruption cleanup and post-reset traffic through the same monitor,
+reference-model, and scoreboard paths as normal transactions.
+
 ## Functional coverage and results
 
 The coverage model samples operation direction, response, address/register
