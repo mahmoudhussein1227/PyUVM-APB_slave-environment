@@ -14,6 +14,9 @@ __pycache__/
 
 # Keep only the merged coverage report; ignore simulation databases and runs.
 /build/*
+!/build/all-tests/
+/build/all-tests/*
+!/build/all-tests/results.xml
 !/build/coverage/
 /build/coverage/*
 !/build/coverage/merged.xml
