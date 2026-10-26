@@ -1,3 +1,5 @@
+"""Cocotb/pyuvm verification environment for the APB slave register block."""
+
 import pyuvm
 from pyuvm import *
 import cocotb
@@ -10,32 +12,32 @@ from cocotb_coverage.coverage import coverage_section , CoverPoint , CoverCross,
 import asyncio
 
 
-# abstract class for handling reset
 class reset_handler:
+    """Mixin interface for components that must discard state on reset."""
+
     def handle_reset(self):
         pass
 
 
-# seq_item 
-# this is the base seq_item for the apb slave 
 class apb_item_base(uvm_sequence_item):
+    """Common fields shared by sequence requests and monitored transfers."""
+
     def __init__(self, name):
         super().__init__(name)
-        # register location field
+        # APB uses byte addresses; aligned word accesses have addr[1:0] == 0.
         self.addr = 0
-        # data to be written or read
         self.data = 0
-        # direction
+        # 0 denotes a read and 1 denotes a write.
         self.dir = 0
-        # 4-bit byte-lane strobe mask for write operations
         self.pstrb = 0xF
 
     def __str__(self):
         result = f"register_addr : {self.addr : 02x} , data : {self.data : 08x} , pstrb : {self.pstrb : 01x} , direction : {"APB_WRITE" if self.dir == 1 else "APB_READ"}"
         return result
 
-# this is the item to be driven
 class apb_item_drv(apb_item_base):
+    """Sequence item with randomized bus idle delays for the driver."""
+
     def __init__(self, name):
         super().__init__(name)
         self.pre_item_drv_delay  = 0
@@ -53,8 +55,9 @@ class apb_item_drv(apb_item_base):
         result =  super().__str__() + f" , pre_drv_delay : {self.pre_item_drv_delay} , post_drv_delay : {self.post_item_drv_delay}"
         return result
 
-# this is the item of the monitored item
 class apb_item_mon(apb_item_base):
+    """Observed transfer plus response, transfer length, and preceding gap."""
+
     def __init__(self, name):
         super().__init__(name)
         self.response = 0
@@ -65,8 +68,9 @@ class apb_item_mon(apb_item_base):
         result = super().__str__() + f" , item_response :{"APB_OK" if self.response == 0 else "APB_ERR"} , item lenght :{self.length} , prev_item_delay{self.prev_item_delay} "
         return result
 
-# sequences
 class apb_sequence_random(uvm_sequence):
+    """Issue one randomized APB transfer."""
+
     def __init__(self, name="uvm_sequence"):
         super().__init__(name)
     async def body(self):
@@ -77,6 +81,8 @@ class apb_sequence_random(uvm_sequence):
         await self.finish_item(self.item)
 
 class apb_sequence_pstrb(uvm_sequence):
+    """Exercise all 16 byte-strobe masks against REG_0 and read each result."""
+
     def __init__(self, name="uvm_sequence"):
         super().__init__(name)
 
@@ -92,16 +98,6 @@ class apb_sequence_pstrb(uvm_sequence):
         item.pstrb = 0xF
         await self.start_item(item)
         await self.finish_item(item)
-        """
-        
-        all_ones_item = apb_item_drv.create("pstrb_all_ones")
-        all_ones_item.addr = 0x00
-        all_ones_item.dir = 1
-        all_ones_item.data = 0xFFFF_FFFF
-        all_ones_item.pstrb = 0xF
-        await self.start_item(all_ones_item)
-        await self.finish_item(all_ones_item)
-        """
         for pstrb_value in range(0x10):
             write_item = apb_item_drv.create(f"pstrb_write_{pstrb_value:X}")
             write_item.addr = 0x00
@@ -118,6 +114,8 @@ class apb_sequence_pstrb(uvm_sequence):
             await self.finish_item(read_item)
 
 class apb_sequence_all_ones(uvm_sequence):
+    """Write all ones to every writable register, then read all 16 slots."""
+
     def __init__(self, name="uvm_sequence"):
         super().__init__(name)
 
@@ -141,6 +139,8 @@ class apb_sequence_all_ones(uvm_sequence):
             await self.finish_item(read_item)
 
 class apb_sequence_ro(uvm_sequence):
+    """Attempt a write to the read-only ID register."""
+
     def __init__(self, name="uvm_sequence"):
         super().__init__(name)
     async def body(self):
@@ -152,6 +152,8 @@ class apb_sequence_ro(uvm_sequence):
         await self.finish_item(self.item)
 
 class apb_sequence_illegal(uvm_sequence):
+    """Issue one read or write to an address outside the implemented map."""
+
     def __init__(self, name="uvm_sequence"):
         super().__init__(name)
 
@@ -165,8 +167,9 @@ class apb_sequence_illegal(uvm_sequence):
         await self.start_item(self.tr)
         await self.finish_item(self.tr)
 
-# driver class
 class apb_driver(uvm_driver , reset_handler):
+    """Drive APB setup/access phases and wait for the slave handshake."""
+
     def __init__(self, name, parent):
         super().__init__(name, parent)
         self.dut = None
@@ -174,10 +177,10 @@ class apb_driver(uvm_driver , reset_handler):
 
     async def drive_transaction(self , item):
         self.logger.info(f"item driven ->{item.__str__()}")
-        # wait pre_drv_delay before strating the trasaction
+        # Idle cycles before setup help exercise transaction spacing.
         for _ in range(item.pre_item_drv_delay):
             await RisingEdge(self.dut.pclk)
-        # setup phase
+        # Setup phase: present the request while PENABLE is low.
         self.dut.psel.value = 1
         self.dut.paddr.value = item.addr
         self.dut.pwrite.value = item.dir
@@ -185,24 +188,24 @@ class apb_driver(uvm_driver , reset_handler):
             self.dut.pwdata.value = item.data
         self.dut.pstrb.value  = item.pstrb
         await RisingEdge(self.dut.pclk)
-        # access phase
+        # Access phase: hold the request until the slave asserts PREADY.
         self.dut.penable.value = 1
         await RisingEdge(self.dut.pclk)
         while self.dut.pready.value != 1:
             await RisingEdge(self.dut.pclk)
-        # end of the transaction
-        # initialize the signals
+        # End the transfer and return the bus to its idle values.
         self.dut.psel.value    = 0
         self.dut.paddr.value   = 0
         self.dut.pstrb.value   = 0
         self.dut.pwrite.value  = 0
         self.dut.pwdata.value  = 0
         self.dut.penable.value = 0
-        # wait a post_drv_delay
+        # Optional idle cycles after completion.
         for _ in range(item.post_item_drv_delay):
             await RisingEdge(self.dut.pclk)
 
     async def drive_transactions(self):
+        """Fetch and complete sequence items until reset cancels this task."""
         while True:
             item =  await self.seq_item_port.get_next_item()
             await self.drive_transaction(item)
@@ -212,9 +215,8 @@ class apb_driver(uvm_driver , reset_handler):
         await super().run_phase()
         while True:
             await self.wait_reset_end()
-            # taking process handle
+            # Keep the transaction loop cancellable when reset interrupts it.
             self.drive_transactions_process =  cocotb.start_soon(self.drive_transactions())
-            # make the run_phase stuck till the end of the drive_transactions task or to be cancelled by handle_reset fn
             try:
                 await self.drive_transactions_process
             except asyncio.CancelledError:
@@ -222,16 +224,18 @@ class apb_driver(uvm_driver , reset_handler):
                     raise
     
     async def wait_reset_end(self):
+        """Wait for an active-low reset to be released on a rising clock edge."""
         while self.dut.presetn.value == 0 :
             await RisingEdge(self.dut.pclk) 
     
     def handle_reset(self):
         super().handle_reset()   
         if self.drive_transactions_process is not None: 
+            # Stop any partially driven transfer and unblock the sequence.
             self.drive_transactions_process.cancel()
             self.drive_transactions_process = None
             self.seq_item_port.item_done()
-        # initialize the bus 
+        # Reset bus outputs to idle values.
         self.dut.psel.value    = 0
         self.dut.paddr.value   = 0
         self.dut.pstrb.value   = 0
@@ -239,8 +243,9 @@ class apb_driver(uvm_driver , reset_handler):
         self.dut.pwdata.value  = 0
         self.dut.penable.value = 0
 
-# monitor class
 class apb_monitor(uvm_monitor , reset_handler):
+    """Observe completed APB transfers and publish them to the environment."""
+
     def __init__(self, name, parent=None):
         super().__init__(name, parent)
         self.dut = None
@@ -248,20 +253,20 @@ class apb_monitor(uvm_monitor , reset_handler):
         self.port_out_model = uvm_analysis_port("port_out_model" , self)
         self.collect_transactions_process = None
     async def collect_transaction(self , item):
-        # wait for the setup phase
+        # Count idle clocks since the preceding observed transfer.
         while self.dut.psel.value != 1 :
             item.prev_item_delay +=1
             await RisingEdge(self.dut.pclk)
-        # collect the addr and dir
+        # Capture request fields during setup.
         item.addr = int(self.dut.paddr.value)
         item.dir  = int(self.dut.pwrite.value)
-        # incase of write access
+        # Write data is present in the request; read data arrives at completion.
         if item.dir == 1:
             item.data       = int(self.dut.pwdata.value)
 
         item.pstrb      = int(self.dut.pstrb.value)
         
-        # send the start of the transaction info to model to predict the exp_resp and data
+        # Update the reference model before the completion is scored.
         self.port_out_model.write(item)
 
         item.length = 1
@@ -271,28 +276,31 @@ class apb_monitor(uvm_monitor , reset_handler):
             item.length +=1
             await RisingEdge(self.dut.pclk)
            
-        # end of the transaction
+        # PREADY marks completion; capture response and read data at this point.
         item.response = int(self.dut.pslverr.value)
         if item.dir == 0:
             item.data = int(self.dut.prdata.value)
 
-        # broadcast collected item
+        # Broadcast the completed transfer to the scoreboard and coverage.
         self.output_port.write(item)
 
         self.logger.info(f"item monitored -> {item.__str__()}")
         await RisingEdge(self.dut.pclk)
 
     async def collect_transactions(self):
+        """Continuously allocate and collect monitor transactions."""
         while True:
             item = apb_item_mon.create("item")
             await self.collect_transaction(item)
 
     async def wait_reset_end(self):
+        """Keep collection paused while the active-low reset is asserted."""
         while self.dut.presetn.value == 0 :
             await RisingEdge(self.dut.pclk)
 
     def handle_reset(self):
         if self.collect_transactions_process is not None:
+            # Discard an incomplete observation interrupted by reset.
             self.collect_transactions_process.cancel()
             self.collect_transactions_process = None
 
@@ -307,21 +315,22 @@ class apb_monitor(uvm_monitor , reset_handler):
                 if self.collect_transactions_process is not None:
                     raise
 
-# sequencer class
 class apb_sqr(uvm_sequencer):
+    """Standard pyuvm sequencer that arbitrates sequence items for the driver."""
+
     def __init__(self, name, parent=None):
         super().__init__(name, parent)
 
-# apb_agent class
 class apb_agent(uvm_agent , reset_handler):
+    """Bundle the APB sequencer, driver, monitor, and reset coordination."""
+
     def __init__(self, name, parent=None):
         super().__init__(name, parent)
         self.dut = ConfigDB().get(self , "" , "dut")
 
     def build_phase(self):
         super().build_phase()
-        # getting the dut from the testbench
-        # create agent's components
+        # The agent is active: sequences drive traffic and the monitor observes it.
         self.driver = apb_driver.create("driver" ,self)
         self.sqr = apb_sqr.create("sqr" , self)
         self.monitor = apb_monitor.create("monitor" ,self)
@@ -329,7 +338,7 @@ class apb_agent(uvm_agent , reset_handler):
     def connect_phase(self):
         super().connect_phase()
         self.driver.seq_item_port.connect(self.sqr.seq_item_export)
-        #pass the dut handle to the driver 
+        # Give the bus-facing components access to DUT signals.
         self.driver.dut = self.dut
         self.monitor.dut = self.dut
 
@@ -345,6 +354,7 @@ class apb_agent(uvm_agent , reset_handler):
         super().handle_reset()
         children = self.get_children()
         for child in children:
+            # Delegate reset handling to children that implement the mixin.
             if isinstance(child , reset_handler):
                 child.handle_reset()
     
@@ -354,19 +364,19 @@ class apb_agent(uvm_agent , reset_handler):
             await self.wait_reset_start()
             self.handle_reset()
             await self.wait_reset_end()
-#############################################################################################################
-# register model
-# reg classes
 class apb_reg_rw(uvm_reg):
+    """One 32-bit read/write register in the UVM register model."""
+
     def __init__(self, name="", n_bits = 32, has_coverage = 0, **kwargs):
         super().__init__(name, n_bits, has_coverage, **kwargs)
 
     def build(self):
-        # bulild and configure the regfields
         self.value = uvm_reg_field("value")
         self.value.configure(self , 32 , 0 , "RW" , False , 0 , True , True , False)
 
 class apb_reg_ro(uvm_reg):
+    """Read-only ID register model with the RTL's reset value."""
+
     def __init__(self, name="", n_bits = 32, has_coverage = 0, **kwargs):
         super().__init__(name, n_bits, has_coverage, **kwargs)
         self.ID =  0xA9B00001
@@ -374,27 +384,27 @@ class apb_reg_ro(uvm_reg):
     def build(self):
         self.value = uvm_reg_field("value")
         self.value.configure(self , 32 , 0 , "RO" , False , self.ID , True , True , False)
-# reg block class
 class apb_reg_block(uvm_reg_block):
+    """Register map for 15 RW words followed by the read-only ID word."""
+
     def __init__(self, name = "", has_coverage = uvm_coverage_model_e.UVM_NO_COVERAGE):
         super().__init__(name, has_coverage)
     def build(self):
         self._default_map = self.create_map("apb_map" , 0 , 4 , uvm_endianness_e.UVM_LITTLE_ENDIAN , True)
-        #self._default_map.set_check_on_read(True)
-        # create,configure and add to map for the RW registers
+        # Map each 32-bit RW word at a four-byte aligned address.
         for i in range(15):
             reg = apb_reg_rw(f"REG_{i}")
             reg.configure(self)
             reg.build()
             self._default_map.add_reg(reg , i*4 , "RW")
-        # create,configure and add to map for the RO registers
+        # The final mapped word is read-only.
         reg_ro = apb_reg_ro("ID")
         reg_ro.configure(self)
         reg_ro.build()
         self._default_map.add_reg(reg_ro , 0x3C , "RO")
-#############################################################################################################################
-# adapter class
+
 class apb_adapter(uvm_reg_adapter):
+    """Translate between UVM register operations and APB sequence items."""
     def __init__(self, name = ""):
         super().__init__(name)
     
@@ -415,32 +425,9 @@ class apb_adapter(uvm_reg_adapter):
         rw.status = uvm_status_e.UVM_IS_OK 
 
 
-"""
-    the predictor base class is found to be incomplete in pyuvm lib
-
-class apb_predictor(uvm_reg_predictor):
-    def __init__(self, name, parent = None):
-        super().__init__(name, parent)
-        self.model = None
-
-    def get_exp_response(self , tr):
-    # access unmapped register -> err
-        register = self.model.reg_block._default_map.get_reg_by_offset(tr.addr)
-        if register == None:
-            return 1
-        else:
-            # writing into read only register -> err
-            rights = register.get_rights(self.reg_block._default_map)
-            if rights == "RO" and tr.dir == 1:
-                return 1
-        return 0
-    
-    def write(self , tr):
-        if self.get_exp_response(tr) == 1:
-            super().write(tr)
-"""
-# model component
 class apb_analysis_imp(uvm_analysis_imp):
+    """Analysis implementation that forwards writes to a supplied callback."""
+
     def __init__(self, name, parent, write_callback):
         super().__init__(name, parent)
         self.write_callback = write_callback
@@ -450,6 +437,8 @@ class apb_analysis_imp(uvm_analysis_imp):
 
 
 class apb_model(uvm_component , reset_handler):
+    """Predict expected bus responses and maintain the register mirror."""
+
     def __init__(self, name, parent=None):
         super().__init__(name, parent)
         self.input_port           = apb_analysis_imp("input_port", self, self.write)
@@ -466,19 +455,17 @@ class apb_model(uvm_component , reset_handler):
             self.reg_block._default_map.get_reg_by_offset(0x3C).predict(0xA9B00001)
         
     def write(self , tr):
-        #self.logger.info(f"item_got from monitor -> {datum.__str__()}")
         response = self.get_exp_response(tr)
-        # send the expected response to the scb
+        # Queue the expected status before the monitor publishes completion.
         self.output_port_response.write(response)
 
-        #self.logger.info(f"the expected response is {"APB_ERR" if response == 1 else "APB_OK"}")
         if response == 0 and tr.dir == 0 :
             reg = self.reg_block._default_map.get_reg_by_offset(tr.addr)
             data_read = reg.get_mirrored_value()
-            # send the expected read data from the register model to the scb  
+            # Compare successful reads against the current mirrored value.
             self.output_port_data.write(data_read)
         elif response == 0 and tr.dir == 1:
-            # update the target register in case of write access
+            # Predict only the byte lanes enabled by PSTRB.
             reg = self.reg_block._default_map.get_reg_by_offset(tr.addr)
             current_data = reg.get_mirrored_value()
             byte_mask = 0
@@ -489,6 +476,7 @@ class apb_model(uvm_component , reset_handler):
             reg.predict(exp_data)
 
     def get_exp_response(self , t):
+        """Return 1 for unmapped accesses and writes to the read-only ID."""
         # access unmapped register -> err
         try :
             register = self.reg_block._default_map.get_reg_by_offset(t.addr)
@@ -502,10 +490,12 @@ class apb_model(uvm_component , reset_handler):
         return 0
 
     def handle_reset(self):
+        """Restore all mirrored register values to their reset state."""
         self.reg_block.reset("HARD")
 
-# scoreboard class
 class apb_scoreboard(uvm_scoreboard , reset_handler):
+    """Compare monitor results against response and data predictions."""
+
     def __init__(self, name, parent=None):
         super().__init__(name, parent)
         self.port_in_response = apb_analysis_imp("port_in_response", self , self.write_in_response)
@@ -515,12 +505,15 @@ class apb_scoreboard(uvm_scoreboard , reset_handler):
         self.exp_data_fifo         = uvm_tlm_fifo("exp_data_fifo" , self)
  
     def write_in_response(self , resp):
+        """Queue the model's expected response status."""
         self.exp_response_fifo.try_put(resp)
 
     def write_in_data(self , data):
+        """Queue expected read data; writes and errors have no data item."""
         self.exp_data_fifo.try_put(data)
 
     def write_in_agent(self ,item):
+        """Consume predictions in transaction order and assert on mismatches."""
         (got_resp , exp_resp) = self.exp_response_fifo.try_get()
         (got_data , exp_data) = self.exp_data_fifo.try_get()
         assert exp_resp == item.response
@@ -528,11 +521,13 @@ class apb_scoreboard(uvm_scoreboard , reset_handler):
             assert exp_data == item.data
 
     def handle_reset(self):
+        """Discard predictions that belong to an interrupted transaction."""
         self.exp_data_fifo.flush()
         self.exp_response_fifo.flush()
 
-# coverage component
 class apb_coverage(uvm_component , reset_handler):
+    """Collect transaction and reset functional coverage."""
+
     def __init__(self, name, parent=None):
         super().__init__(name, parent)
         self.port_in = apb_analysis_imp("port_in" , self , self.write)
@@ -544,6 +539,8 @@ class apb_coverage(uvm_component , reset_handler):
     def write(self , item):
             self.sample_item(item)
     
+    # Per-transfer coverage: operation, response, address class, strobe,
+    # data corner, and idle gap, plus crosses of these dimensions.
     cover_item = coverage_section(
         CoverPoint(name="apb_coverage.dir",
                    vname="dir",
@@ -611,8 +608,7 @@ class apb_coverage(uvm_component , reset_handler):
     def sample_item(self, item):
         pass
     
-    
-    
+    # Reset is sampled separately because it is not a completed APB transfer.
     cover_reset = coverage_section(
         CoverPoint(name="apb_coverage.reset_coverage",
                     vname="psel",
@@ -629,14 +625,15 @@ class apb_coverage(uvm_component , reset_handler):
 
         
 
-# evn class
 class apb_env(uvm_env , reset_handler):
+    """Instantiate and connect the active agent, model, scoreboard, coverage."""
+
     def __init__(self, name, parent=None):
         super().__init__(name, parent)
 
     def build_phase(self):
         super().build_phase()
-        # create the agent component
+        # Build the bus agent and the analysis-side checking components.
         self.agent     = apb_agent.create("agent" , self)
         self.model     = apb_model.create("model" , self)
         self.scb       = apb_scoreboard.create("scb" , self)
@@ -645,22 +642,19 @@ class apb_env(uvm_env , reset_handler):
     def connect_phase(self):
         super().connect_phase()
         self.adapter = apb_adapter.create("adapter")
-        #self.predictor.adapter = self.adapter
-        #self.agent.monitor.output_port.connect(self.predictor.bus_in)
-        #self.predictor.map = self.model.reg_block._default_map
-        #self.predictor.model = self.model
+        # Route register-model operations through the APB sequencer and adapter.
         self.model.reg_block._default_map.set_sequencer(self.agent.sqr , self.adapter)
         self.model.reg_block._default_map.set_auto_predict(True)
 
-        # model-monitor connection
+        # The monitor sends request fields to the predictor before completion.
         self.agent.monitor.port_out_model.connect(self.model.input_port)
 
-        # scb connections
+        # Completed transfers and model predictions meet at the scoreboard.
         self.agent.monitor.output_port.connect(self.scb.port_in_agent)
         self.model.output_port_response.connect(self.scb.port_in_response)
         self.model.output_port_data.connect(self.scb.port_in_data)
 
-        # coverage -monitor connection
+        # Sample the same completed transactions used for scoreboarding.
         self.agent.monitor.output_port.connect(self.coverage.port_in)
 
     async def wait_reset_start(self):
@@ -683,18 +677,20 @@ class apb_env(uvm_env , reset_handler):
         self.scb.handle_reset()
 
 class apb_test_base(uvm_test):
+    """Default randomized test: run 5,000 generated sequence items."""
+
     def __init__(self, name, parent=None):
         super().__init__(name, parent)
         self.num_sequences = 5000
 
     def build_phase(self):
         super().build_phase()
-        # create the env
         self.env = apb_env.create("env" , self)
 
     async def run_phase(self):
         await super().run_phase()
         self.raise_objection()
+        # Allow reset and UVM run-phase components to start before traffic.
         await Timer(100 , "ns")
 
         for _ in range(self.num_sequences):
@@ -705,6 +701,8 @@ class apb_test_base(uvm_test):
         self.drop_objection()
 
 class apb_test_reset_ongoing(apb_test_base):
+    """Assert reset during a transfer, then verify traffic resumes afterward."""
+
     def __init__(self, name, parent=None):
         super().__init__(name, parent)
         self.num_sequences = 10
@@ -728,6 +726,8 @@ class apb_test_reset_ongoing(apb_test_base):
         self.drop_objection()
 
 class apb_test_pstrb(apb_test_base):
+    """Select the directed sequence that covers each byte strobe."""
+
     def __init__(self, name, parent=None):
         super().__init__(name, parent)
         self.num_sequences = 1
@@ -737,6 +737,8 @@ class apb_test_pstrb(apb_test_base):
 
 
 class apb_test_illegal(apb_test_base):
+    """Select randomized accesses to unmapped addresses."""
+
     def __init__(self, name, parent=None):
         super().__init__(name, parent)
         self.num_sequences = 30
@@ -746,6 +748,8 @@ class apb_test_illegal(apb_test_base):
 
 
 class apb_test_ro(apb_test_base):
+    """Select a write attempt to the read-only ID register."""
+
     def __init__(self, name, parent=None):
         super().__init__(name, parent)
         self.num_sequences = 1
@@ -754,6 +758,8 @@ class apb_test_ro(apb_test_base):
         )
 
 class apb_test_all_ones(apb_test_base):
+    """Select the all-ones register write/read sequence."""
+
     def __init__(self, name, parent=None):
         super().__init__(name, parent)
         self.num_sequences = 1
@@ -762,6 +768,7 @@ class apb_test_all_ones(apb_test_base):
         )
 
 async def clock(dut):
+    """Generate a 10 ns free-running clock."""
     while True:
         dut.pclk.value = 0
         await Timer(5 , "ns")
@@ -769,6 +776,7 @@ async def clock(dut):
         await Timer(5 , "ns")
 
 async def run_apb_test(dut, test_name):
+    """Initialize the DUT, run the requested pyuvm test, and export coverage."""
     dut.presetn.value = 0
     dut.psel.value    = 0
     dut.paddr.value   = 0
@@ -778,11 +786,13 @@ async def run_apb_test(dut, test_name):
     cocotb.start_soon(clock(dut))
     await Timer(20, "ns")
     dut.presetn.value = 1
+    # Components retrieve their DUT handles from ConfigDB during construction.
     ConfigDB().set(None , "uvm_test_top.env.agent","dut", dut)
     ConfigDB().set(None , "uvm_test_top.env.coverage","dut", dut)
     await uvm_root().run_test(test_name, keep_set={ConfigDB})
     coverage_file = os.environ.get("APB_COVERAGE_FILE")
     if coverage_file:
+        # Create the output directory so callers can choose nested report paths.
         coverage_path = Path(coverage_file)
         coverage_path.parent.mkdir(parents=True, exist_ok=True)
         coverage_db.export_to_xml(str(coverage_path))
@@ -790,27 +800,33 @@ async def run_apb_test(dut, test_name):
 
 @cocotb.test()
 async def test_random(dut):
+    """Cocotb entry point for the base randomized regression."""
     await run_apb_test(dut, "apb_test_base")
 
 
 @cocotb.test()
 async def test_pstrb(dut):
+    """Cocotb entry point for byte-strobe directed testing."""
     await run_apb_test(dut, "apb_test_pstrb")
 
 
 @cocotb.test()
 async def test_illegal(dut):
+    """Cocotb entry point for unmapped-address testing."""
     await run_apb_test(dut, "apb_test_illegal")
 
 
 @cocotb.test()
 async def test_ro(dut):
+    """Cocotb entry point for the read-only register test."""
     await run_apb_test(dut, "apb_test_ro")
 
 @cocotb.test()
 async def test_reset_on_going(dut):
+    """Cocotb entry point for reset-during-transfer testing."""
     await run_apb_test(dut, "apb_test_reset_ongoing")
 
 @cocotb.test()
 async def test_all_ones(dut):
+    """Cocotb entry point for all-ones register data testing."""
     await run_apb_test(dut, "apb_test_all_ones")
